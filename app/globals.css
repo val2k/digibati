@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand: #166ce5;
+  --color-brand-strong: #0d5fce;
+  --color-ink: #122033;
+  --color-muted: #68778d;
+  --color-line: #dbe3ef;
+  --color-blueprint: #cfe0fb;
+  --color-surface: #f5f8fd;
+  --color-background: #fbfcfe;
+  --color-ice: #eaf3ff;
+  --font-sans: var(--font-geist), Arial, sans-serif;
+  --font-display: var(--font-geist), Arial, sans-serif;
+
+  --text-display: clamp(3.3rem, 2.15rem + 3.65vw, 5.7rem);
+  --text-display--line-height: 0.97;
+  --text-display--font-weight: 750;
+  --text-display--letter-spacing: -0.072em;
+
+  --text-heading: clamp(3.15rem, 1.6rem + 4.2vw, 6.8rem);
+  --text-heading--line-height: 0.96;
+  --text-heading--font-weight: 750;
+  --text-heading--letter-spacing: -0.068em;
+
+  --text-footer: clamp(3.1rem, 1.15rem + 6.3vw, 8.5rem);
+  --text-footer--line-height: 0.94;
+  --text-footer--font-weight: 750;
+  --text-footer--letter-spacing: -0.072em;
+
+  --text-feature: clamp(2.1rem, 1.8rem + 1.25vw, 3rem);
+  --text-feature--line-height: 1;
+  --text-feature--font-weight: 730;
+  --text-feature--letter-spacing: -0.052em;
+
+  --text-card-title: clamp(1.5rem, 1.35rem + 0.5vw, 1.9rem);
+  --text-card-title--line-height: 1.08;
+  --text-card-title--font-weight: 730;
+  --text-card-title--letter-spacing: -0.04em;
+
+  --text-price: clamp(2.6rem, 2.35rem + 0.9vw, 3.35rem);
+  --text-price--line-height: 1;
+  --text-price--font-weight: 750;
+  --text-price--letter-spacing: -0.055em;
+
+  --text-brandmark: clamp(2.1rem, 1.9rem + 0.8vw, 3rem);
+  --text-brandmark--line-height: 1;
+  --text-brandmark--font-weight: 800;
+  --text-brandmark--letter-spacing: -0.075em;
+
+  --text-subheading: 1.25rem;
+  --text-subheading--line-height: 1.3;
+  --text-subheading--font-weight: 700;
+  --text-subheading--letter-spacing: -0.02em;
+
+  --text-body-large: clamp(1.05rem, 0.97rem + 0.35vw, 1.35rem);
+  --text-body-large--line-height: 1.2;
+  --text-body-large--font-weight: 500;
+  --text-body-large--letter-spacing: 0;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.2;
+  --text-body--font-weight: 400;
+  --text-body--letter-spacing: 0;
+
+  --text-button: 1.125rem;
+  --text-button--line-height: 1.3;
+  --text-button--font-weight: 650;
+  --text-button--letter-spacing: 0;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-small--font-weight: 400;
+  --text-small--letter-spacing: 0;
+
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.4;
+  --text-label--font-weight: 600;
+  --text-label--letter-spacing: 0.02em;
+
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--font-weight: 700;
+  --text-eyebrow--letter-spacing: 0.08em;
+
+  --text-micro: clamp(0.45rem, 0.35rem + 0.2vw, 0.73rem);
+  --text-micro--line-height: 1.3;
+  --text-micro--font-weight: 400;
+  --text-micro--letter-spacing: 0;
+}
