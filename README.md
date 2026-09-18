@@ -1,5 +1,21 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Parcours de la démo vers le devis
+
+Le lien `https://www.digibati.fr/?devis=1&source=demo` ouvre automatiquement le
+formulaire existant. Seul `devis` est retiré de l’URL, sans navigation ; les autres
+paramètres et l’ancre sont conservés. Une URL sans `devis=1` laisse le formulaire
+fermé.
+
+La provenance est conservée dans le champ masqué `source` du formulaire et ajoutée
+à l’e-mail sous la forme `Provenance : démo`. Elle reste disponible après fermeture
+et réouverture du formulaire. Le paramètre `source=demo` étant conservé dans l’URL,
+elle est également retrouvée après actualisation, sans rouvrir le formulaire.
+
+Le bandeau et son activation sont gérés dans le projet distinct
+`digibati-template-plombier`. Les deux projets doivent être déployés pour rendre
+le parcours disponible sur les domaines publics.
+
 ## Getting Started
 
 First, run the development server:

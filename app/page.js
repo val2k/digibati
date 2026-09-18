@@ -1,4 +1,7 @@
 import Image from "next/image";
+import { ConversationIcon, EyeIcon } from "@/components/ButtonIcons";
+import CtaButton from "@/components/CtaButton";
+import ContactDrawer, { ContactButton } from "@/components/ContactDrawer";
 import Footer from "@/components/Footer";
 import Offers from "@/components/Offers";
 import plumberDemo from "@/public/images/laurent-adam-demo.png";
@@ -19,8 +22,8 @@ function Crane() {
         <span className="absolute -top-[.18rem] right-[.3rem] size-[.6rem] rounded-full border-2 border-current bg-surface" />
       </div>
 
-      <div className="absolute top-[7.75rem] left-[calc(38%+1.28rem)] h-[1.45rem] w-0.5 bg-current" />
-      <div className="absolute top-[9rem] left-[calc(38%+1.02rem)] h-[1.35rem] w-[1.1rem] rounded-b-xl border-2 border-t-0 border-r-transparent border-current">
+      <div className="animate-crane-cable absolute top-[7.75rem] left-[calc(38%+1.28rem)] h-[1.45rem] w-0.5 origin-top bg-current will-change-transform group-hover:[animation-play-state:paused] motion-reduce:animate-none" />
+      <div className="animate-crane-hook absolute top-[9rem] left-[calc(38%+1.02rem)] h-[1.35rem] w-[1.1rem] rounded-b-xl border-2 border-t-0 border-r-transparent border-current will-change-transform group-hover:[animation-play-state:paused] motion-reduce:animate-none">
         <span className="absolute -top-[.48rem] -left-[.08rem] size-2.5 rotate-45 border-2 border-current" />
       </div>
 
@@ -34,12 +37,12 @@ function WebsitePreview() {
   return (
     <figure
       id="demo"
-      className="relative isolate z-10 m-0 w-full scroll-mt-8"
+      className="group relative isolate z-10 m-0 w-full scroll-mt-8"
     >
       <Crane />
 
       <div className="relative w-full px-[clamp(.75rem,2.1vw,2.1rem)] pt-[clamp(1.55rem,2.9vw,3rem)] pb-[clamp(2.3rem,4.5vw,4.5rem)] max-[600px]:px-[.65rem] max-[600px]:pt-[1.1rem] max-[600px]:pb-[2.3rem]">
-        <div className="relative z-10 w-full origin-[65%_50%] -rotate-2 overflow-hidden rounded-[.9rem] border border-[#ccd7e7] bg-white shadow-[0_28px_72px_rgb(31_68_119_/_14%)]">
+        <div className="animate-site-float relative z-10 w-full origin-[65%_50%] -rotate-2 overflow-hidden rounded-[.9rem] border border-[#ccd7e7] bg-white shadow-[0_28px_72px_rgb(31_68_119_/_14%)] will-change-transform group-hover:[animation-play-state:paused] motion-reduce:animate-none">
           <div className="grid min-h-12 grid-cols-[4.2rem_1fr_4.2rem] items-center border-b border-[#e3e8f0] bg-[#f9fbfe] px-4 text-[#7d899a] max-[600px]:min-h-[2.2rem] max-[600px]:grid-cols-[2.4rem_1fr_2.4rem] max-[600px]:px-2">
             <div className="flex gap-1" aria-hidden="true">
               <span className="size-2 rounded-full bg-[#d9e0ea]" />
@@ -73,17 +76,17 @@ function WebsitePreview() {
 
 export default function Home() {
   return (
-    <>
+    <ContactDrawer>
       <main>
         <div className="relative isolate min-h-[100svh] overflow-hidden bg-surface">
-          <header className="relative z-20 h-16 border-b border-line sm:h-[72px]">
+          <header className="site-topbar relative z-20 border-b border-line">
             <div className="mx-5 flex h-full items-center sm:mx-8 lg:mx-[clamp(1.5rem,4vw,5.1rem)]">
               <a
                 href="#top"
                 aria-label="Digibati, accueil"
                 className={`font-display text-brandmark text-brand ${focusClasses}`}
               >
-                digibati<span className="text-ink">.</span>
+                digibati
               </a>
               <nav
                 aria-label="Navigation principale"
@@ -126,18 +129,20 @@ export default function Home() {
                 présenter vos réalisations et faciliter les demandes de devis.
               </p>
               <div className="mt-7 flex flex-col items-stretch gap-3 sm:mt-[clamp(2rem,3.8vh,2.7rem)] sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5">
-                <a
-                  href="mailto:bonjour@digibati.fr?subject=Parlons%20de%20mon%20site"
-                  className={`text-button flex min-h-17 w-full items-center justify-center rounded-lg bg-brand px-4 py-4 text-white shadow-[0_14px_32px_rgb(22_108_229_/_13%)] transition duration-200 hover:-translate-y-0.5 hover:bg-brand-strong hover:shadow-[0_17px_36px_rgb(22_108_229_/_21%)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:min-h-20 sm:w-auto sm:px-5 ${focusClasses}`}
+                <ContactButton>
+                  <ConversationIcon />
+                  Parlons de votre site
+                </ContactButton>
+                <CtaButton
+                  href="https://demo.digibati.fr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Voir la démo (nouvel onglet)"
+                  variant="secondary"
                 >
-                  <span>Parlons de votre site</span>
-                </a>
-                <a
-                  href="#demo"
-                  className={`text-button flex min-h-17 w-full items-center justify-center rounded-lg border border-[#b8c8dc] bg-white/70 px-4 py-4 text-ink transition duration-200 hover:-translate-y-0.5 hover:border-brand hover:bg-ice hover:text-brand hover:shadow-[0_12px_28px_rgb(34_76_128_/_10%)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:min-h-20 sm:w-auto sm:px-5 ${focusClasses}`}
-                >
-                  <span>Voir la démo</span>
-                </a>
+                  <EyeIcon />
+                  Voir la démo
+                </CtaButton>
               </div>
             </div>
 
@@ -149,6 +154,6 @@ export default function Home() {
       </main>
 
       <Footer />
-    </>
+    </ContactDrawer>
   );
 }

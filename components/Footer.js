@@ -1,11 +1,14 @@
+import { ConversationIcon } from "@/components/ButtonIcons";
+import { ContactButton } from "@/components/ContactDrawer";
+
 const focusClasses =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-brand";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-brand-strong";
 
 export default function Footer() {
   return (
     <footer
       id="contact"
-      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden bg-brand px-5 py-6 text-white sm:px-8 sm:py-8 lg:px-[clamp(1.5rem,4vw,5.1rem)] lg:py-[clamp(2rem,4vw,5rem)]"
+      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden bg-brand-strong px-5 py-6 text-white sm:px-8 sm:py-8 lg:px-[clamp(1.5rem,4vw,5.1rem)] lg:py-[clamp(2rem,4vw,5rem)]"
     >
       <div
         aria-hidden="true"
@@ -22,12 +25,13 @@ export default function Footer() {
           Parlons de votre activité et construisons un site qui inspire
           confiance dès le premier regard.
         </p>
-        <a
-          href="mailto:bonjour@digibati.fr?subject=Parlons%20de%20mon%20site"
-          className={`text-button mt-8 flex min-h-18 w-full items-center justify-center rounded-lg bg-white px-3 py-4 text-brand shadow-[0_18px_45px_rgb(6_47_107_/_20%)] transition duration-200 hover:-translate-y-0.5 hover:bg-ice motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:mt-[clamp(2rem,4vh,3rem)] sm:min-h-20 sm:w-fit sm:min-w-[22rem] ${focusClasses}`}
+        <ContactButton
+          variant="inverse"
+          className="mt-8 sm:mt-[clamp(2rem,4vh,3rem)]"
         >
-          <span>Parlons de votre projet</span>
-        </a>
+          <ConversationIcon />
+          Parlons de votre projet
+        </ContactButton>
       </div>
 
       <div className="text-small relative z-10 flex flex-col items-start gap-3 border-t border-white/30 pt-6 text-white/70 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:pt-8">

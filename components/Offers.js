@@ -1,3 +1,5 @@
+import { ContactTrigger } from "@/components/ContactDrawer";
+
 const offers = [
   {
     name: "Site essentiel",
@@ -11,7 +13,6 @@ const offers = [
       "Formulaire de demande de devis",
       "Fondations du référencement local",
     ],
-    subject: "Je suis intéressé par l'offre Site essentiel",
   },
   {
     name: "Site métier",
@@ -25,7 +26,6 @@ const offers = [
       "Avis et éléments de confiance",
       "Référencement local approfondi",
     ],
-    subject: "Je suis intéressé par l'offre Site métier",
     featured: true,
   },
   {
@@ -40,7 +40,6 @@ const offers = [
       "Fonctionnalités spécifiques",
       "Accompagnement au lancement",
     ],
-    subject: "Je souhaite parler d'un site sur mesure",
   },
 ];
 
@@ -128,8 +127,8 @@ export default function Offers() {
                 ))}
               </ul>
 
-              <a
-                href={`mailto:bonjour@digibati.fr?subject=${encodeURIComponent(offer.subject)}`}
+              <ContactTrigger
+                offer={offer.name}
                 className={`text-label mt-auto flex min-h-13 items-center justify-center rounded-lg border px-3 py-3 transition-colors motion-reduce:transition-none ${focusClasses} ${
                   offer.featured
                     ? "border-white bg-white text-brand hover:bg-ice"
@@ -137,7 +136,7 @@ export default function Offers() {
                 }`}
               >
                 Découvrir l’offre
-              </a>
+              </ContactTrigger>
             </article>
           ))}
         </div>
