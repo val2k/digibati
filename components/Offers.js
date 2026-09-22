@@ -1,4 +1,4 @@
-import { ContactTrigger } from "@/components/ContactDrawer";
+import { ContactButton } from "@/components/ContactDrawer";
 
 const offers = [
   {
@@ -42,9 +42,6 @@ const offers = [
     ],
   },
 ];
-
-const focusClasses =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-4";
 
 export default function Offers() {
   return (
@@ -127,16 +124,14 @@ export default function Offers() {
                 ))}
               </ul>
 
-              <ContactTrigger
+              <ContactButton
                 offer={offer.name}
-                className={`text-label mt-auto flex min-h-13 items-center justify-center rounded-lg border px-3 py-3 transition-colors motion-reduce:transition-none ${focusClasses} ${
-                  offer.featured
-                    ? "border-white bg-white text-brand hover:bg-ice"
-                    : "border-[#c8d6e6] text-ink hover:border-brand hover:bg-ice hover:text-brand"
-                }`}
+                variant={offer.featured ? "inverse" : "secondary"}
+                size="compact"
+                className="mt-auto"
               >
                 Découvrir l’offre
-              </ContactTrigger>
+              </ContactButton>
             </article>
           ))}
         </div>

@@ -13,17 +13,23 @@ const highlights = {
   inverse: "bg-brand/10",
 };
 
+const sizes = {
+  default: "text-button min-h-16 px-4 py-3.5 sm:min-h-18 sm:w-fit sm:px-5",
+  compact: "text-label min-h-13 px-3 py-3",
+};
+
 export default function CtaButton({
   as: Component = "a",
   children,
   className = "",
   variant = "primary",
+  size = "default",
   ...props
 }) {
   return (
     <Component
       {...props}
-      className={`group text-button relative isolate flex min-h-16 w-full items-center justify-center overflow-hidden rounded-lg px-4 py-3.5 text-center transition-[color,background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 motion-reduce:transition-none sm:min-h-18 sm:w-fit sm:px-5 ${variants[variant]} ${className}`}
+      className={`group relative isolate flex w-full items-center justify-center overflow-hidden rounded-lg text-center transition-[color,background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 motion-reduce:transition-none ${sizes[size]} ${variants[variant]} ${className}`}
     >
       <span
         aria-hidden="true"

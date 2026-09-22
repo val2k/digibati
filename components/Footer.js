@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ConversationIcon } from "@/components/ButtonIcons";
 import { ContactButton } from "@/components/ContactDrawer";
 
@@ -8,14 +9,14 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden bg-brand-strong px-5 py-6 text-white sm:px-8 sm:py-8 lg:px-[clamp(1.5rem,4vw,5.1rem)] lg:py-[clamp(2rem,4vw,5rem)]"
+      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden bg-brand-strong pt-6 text-white sm:pt-8 lg:pt-[clamp(2rem,4vw,5rem)]"
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgb(255_255_255_/_8%)_1px,transparent_1px),linear-gradient(90deg,rgb(255_255_255_/_8%)_1px,transparent_1px)] [background-size:3.75rem_3.75rem] [mask-image:linear-gradient(to_bottom,transparent_4%,black_45%,transparent_100%)] sm:[background-size:5.5rem_5.5rem]"
       />
 
-      <div className="relative z-10 my-16 w-full max-w-[90rem] sm:my-[clamp(4rem,8vh,7rem)]">
+      <div className="relative z-10 my-16 w-full max-w-[90rem] px-5 sm:my-[clamp(4rem,8vh,7rem)] sm:px-8 lg:px-[clamp(1.5rem,4vw,5.1rem)]">
         <h2 className="font-display text-heading text-white">
           Votre savoir-faire mérite
           <br />
@@ -34,11 +35,16 @@ export default function Footer() {
         </ContactButton>
       </div>
 
-      <div className="text-small relative z-10 flex flex-col items-start gap-3 border-t border-white/30 pt-6 text-white/70 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:pt-8">
+      <div className="text-small relative z-10 flex flex-col gap-3 border-t border-white/15 px-5 py-4 text-white/70 sm:px-8 md:flex-row md:items-center md:justify-between md:gap-8 lg:px-[clamp(1.5rem,4vw,5.1rem)]">
         <p>© 2026 Digibati. Tous droits réservés.</p>
-        <a href="#top" className={`font-semibold text-white ${focusClasses}`}>
-          Retour en haut ↑
-        </a>
+        <nav aria-label="Informations légales" className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2">
+          <Link href="/mentions-legales" className={`transition-colors hover:text-white ${focusClasses}`}>
+            Mentions légales
+          </Link>
+          <Link href="/politique-de-confidentialite" className={`transition-colors hover:text-white ${focusClasses}`}>
+            Politique de confidentialité
+          </Link>
+        </nav>
       </div>
     </footer>
   );

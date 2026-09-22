@@ -130,6 +130,30 @@
   height: 64px;
 }
 
+.conversation-icon > circle {
+  animation: conversation-dot-blink 1.5s ease-in-out infinite;
+}
+
+.conversation-icon > circle:nth-of-type(2) {
+  animation-delay: 0.25s;
+}
+
+.conversation-icon > circle:nth-of-type(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes conversation-dot-blink {
+  0%,
+  40%,
+  100% {
+    opacity: 0.3;
+  }
+
+  20% {
+    opacity: 1;
+  }
+}
+
 .contact-drawer {
   position: fixed;
   inset: 0 0 0 auto;
@@ -626,7 +650,8 @@
     transition: none;
   }
 
-  .offer-select-menu {
+  .offer-select-menu,
+  .conversation-icon > circle {
     animation: none;
   }
 }
