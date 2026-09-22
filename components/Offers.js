@@ -1,45 +1,56 @@
 import { ContactButton } from "@/components/ContactDrawer";
+import OfferReveal from "@/components/OfferReveal";
 
 const offers = [
   {
     name: "Site essentiel",
     fit: "Pour démarrer",
-    price: "990 €",
+    price: "799 €",
+    monthlyPrice: "29 €",
     description:
-      "Une présence en ligne claire pour présenter votre activité et recevoir des demandes.",
+      "Une page claire pour présenter votre entreprise, rassurer vos visiteurs et être contacté.",
     features: [
-      "Une page complète et responsive",
-      "Présentation de vos services",
+      "Une page adaptée aux mobiles",
+      "Tous vos services sur la même page",
+      "Design adapté à votre identité",
       "Formulaire de demande de devis",
       "Fondations du référencement local",
     ],
+    details: "Une série de corrections incluse avant la mise en ligne.",
   },
   {
     name: "Site métier",
     fit: "Recommandé",
-    price: "1 790 €",
+    price: "1 499 €",
+    monthlyPrice: "29 €",
     description:
-      "Un site complet pour valoriser votre savoir-faire et rassurer vos futurs clients.",
+      "Un site complet pour détailler vos prestations et aider vos futurs clients à choisir votre entreprise.",
     features: [
-      "Plusieurs pages dédiées",
-      "Galerie de réalisations",
-      "Avis et éléments de confiance",
-      "Référencement local approfondi",
+      "Accueil et page contact",
+      "Jusqu’à 4 pages dédiées à vos services",
+      "Design adapté à votre identité",
+      "Formulaire de demande de devis",
+      "Référencement local par prestation",
     ],
+    details: "Deux séries de corrections incluses. Blog, réalisations et pages supplémentaires en option.",
     featured: true,
   },
   {
     name: "Site sur mesure",
     fit: "Pour aller plus loin",
     price: "2 990 €",
+    startingFrom: true,
+    monthlyPrice: "29 €",
     description:
       "Un site pensé autour de votre entreprise, de votre identité et de vos objectifs.",
     features: [
-      "Direction artistique personnalisée",
-      "Contenus et parcours sur mesure",
-      "Fonctionnalités spécifiques",
+      "Direction artistique et maquette originales",
+      "Organisation du site sur mesure",
+      "Contenus et parcours personnalisés",
+      "Fonctionnalités spécifiques sur devis",
       "Accompagnement au lancement",
     ],
+    details: "Un devis adapté à votre projet, avec les pages, fonctionnalités et étapes de validation définies ensemble.",
   },
 ];
 
@@ -61,19 +72,19 @@ export default function Offers() {
             au bon rythme.
           </h2>
           <p className="text-body-large mb-2 max-w-[35rem]">
-            Choisissez une base claire. Chaque offre est ensuite adaptée à votre
-            métier, votre zone d’intervention et vos objectifs.
+            Une page pour démarrer, un site pour détailler vos services ou une
+            création sur mesure. Choisissez l’offre adaptée à votre entreprise.
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-[44rem] gap-4 min-[901px]:max-w-[86rem] min-[901px]:grid-cols-3 min-[901px]:gap-[clamp(1rem,1.8vw,1.75rem)]">
+        <OfferReveal className="offer-reveal mx-auto grid max-w-[44rem] gap-4 min-[901px]:max-w-[86rem] min-[901px]:grid-cols-3 min-[901px]:gap-[clamp(1rem,1.8vw,1.75rem)]">
           {offers.map((offer) => (
             <article
               key={offer.name}
-              className={`flex min-h-0 flex-col rounded-xl border p-6 shadow-[0_16px_44px_rgb(38_70_111_/_6%)] transition-shadow duration-200 motion-reduce:transition-none min-[601px]:min-h-[30rem] min-[601px]:p-7 min-[1181px]:p-8 ${
+              className={`flex min-h-0 flex-col rounded-xl border p-6 shadow-[0_16px_44px_rgb(38_70_111_/_6%)] transition-[translate] duration-250 ease-out motion-safe:hover:-translate-y-1 motion-reduce:transition-none min-[601px]:min-h-[30rem] min-[601px]:p-7 min-[1181px]:p-8 ${
                 offer.featured
-                  ? "border-brand bg-brand text-white shadow-[0_24px_65px_rgb(22_108_229_/_23%)] hover:shadow-[0_28px_72px_rgb(22_108_229_/_29%)]"
-                  : "border-line bg-white/90 hover:shadow-[0_22px_58px_rgb(38_70_111_/_11%)]"
+                  ? "border-brand bg-brand text-white shadow-[0_24px_65px_rgb(22_108_229_/_23%)]"
+                  : "border-line bg-white/90"
               }`}
             >
               <div className="flex min-h-8 items-start">
@@ -94,9 +105,20 @@ export default function Offers() {
                 {offer.name}
               </h3>
               <p
+                className={`text-small mt-4 ${offer.featured ? "text-white/75" : "text-muted"}`}
+              >
+                {offer.startingFrom ? "Création à partir de" : "Création du site"}
+              </p>
+              <p
                 className={`mt-2 font-display text-price ${offer.featured ? "text-white" : "text-ink"}`}
               >
-                {offer.price}
+                <span className="whitespace-nowrap">{offer.price}</span>{" "}
+                <span className="font-sans text-small font-medium tracking-normal">HT</span>
+              </p>
+              <p
+                className={`text-small mt-2 font-semibold ${offer.featured ? "text-white" : "text-black"}`}
+              >
+                + {offer.monthlyPrice} HT / mois d’entretien
               </p>
               <p
                 className={`text-small mt-4 ${offer.featured ? "text-white/75" : "text-muted"}`}
@@ -124,6 +146,12 @@ export default function Offers() {
                 ))}
               </ul>
 
+              <p
+                className={`text-small mb-6 ${offer.featured ? "text-white/75" : "text-muted"}`}
+              >
+                {offer.details}
+              </p>
+
               <ContactButton
                 offer={offer.name}
                 variant={offer.featured ? "inverse" : "secondary"}
@@ -134,7 +162,14 @@ export default function Offers() {
               </ContactButton>
             </article>
           ))}
-        </div>
+        </OfferReveal>
+        <p className="text-small mx-auto mt-8 max-w-[52rem] text-center text-muted">
+          L’entretien comprend l’hébergement, un nom de domaine standard, les
+          sauvegardes et la maintenance technique du site vitrine. Les besoins
+          techniques spécifiques sont chiffrés au devis. Les pages de mentions
+          légales et de confidentialité sont prévues dans chaque offre, en plus
+          des pages de présentation.
+        </p>
       </div>
     </section>
   );
