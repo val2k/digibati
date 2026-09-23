@@ -1,5 +1,31 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Formulaire de contact
+
+Le formulaire utilise FormSubmit, comme valerian.studio, avec un envoi AJAX qui
+garde le visiteur sur la page. Le destinataire par défaut est `bonjour@digibati.fr`.
+Le formulaire affiche l’envoi en cours, puis une confirmation ou une erreur ;
+les champs sont conservés si l’envoi échoue. Un champ piège limite les soumissions
+automatisées. Aucun identifiant du formulaire personnel n’est réutilisé.
+
+Avant ouverture au public :
+
+1. Vérifier que la boîte `bonjour@digibati.fr` reçoit les e-mails.
+2. Envoyer une demande de test depuis le site. FormSubmit demande de confirmer
+   l’adresse destinataire lors de sa première utilisation.
+3. Ouvrir l’e-mail d’activation FormSubmit et confirmer l’adresse.
+4. Refaire un test et vérifier la réception, l’offre choisie, les coordonnées et
+   la provenance de la démo. La confirmation affichée correspond à l’acceptation
+   par FormSubmit ; elle ne vérifie pas la réception dans la boîte mail.
+
+L’identifiant public fourni par FormSubmit après activation peut remplacer
+l’adresse dans l’URL : définir `NEXT_PUBLIC_FORMSUBMIT_RECIPIENT` dans `.env.local`
+et dans l’hébergement, puis reconstruire/redéployer le site. Cette variable est
+publique et ne doit contenir aucune clé secrète. Sans elle, l’adresse ci-dessus
+est utilisée. La configuration de valerian.studio reste inchangée.
+
+Documentation : https://formsubmit.co/documentation
+
 ## Parcours de la démo vers le devis
 
 Le lien `https://www.digibati.fr/?devis=1&source=demo` ouvre automatiquement le
@@ -8,13 +34,34 @@ paramètres et l’ancre sont conservés. Une URL sans `devis=1` laisse le formu
 fermé.
 
 La provenance est conservée dans le champ masqué `source` du formulaire et ajoutée
-à l’e-mail sous la forme `Provenance : démo`. Elle reste disponible après fermeture
+à l’e-mail sous la forme `Provenance : Démo plombier`. Elle reste disponible après fermeture
 et réouverture du formulaire. Le paramètre `source=demo` étant conservé dans l’URL,
 elle est également retrouvée après actualisation, sans rouvrir le formulaire.
 
 Le bandeau et son activation sont gérés dans le projet distinct
 `digibati-template-plombier`. Les deux projets doivent être déployés pour rendre
 le parcours disponible sur les domaines publics.
+
+## Pages légales
+
+Les routes `/mentions-legales` et `/politique-de-confidentialite` sont accessibles
+depuis le footer commun. Le formulaire de contact propose aussi un lien vers la
+politique dans un nouvel onglet pour conserver la demande en cours.
+
+Les pages sont des versions à compléter : renseigner l’identité de l’éditeur,
+son statut, son adresse, son immatriculation, sa TVA éventuelle, son téléphone,
+le responsable de publication et les coordonnées de l’hébergeur. Confirmer aussi
+le prestataire de messagerie, les durées de conservation et les éventuels
+transferts de données de FormSubmit et des autres prestataires.
+
+Après validation, retirer l’encart de version à compléter dans
+`components/LegalPage.js`, mettre à jour la date et retirer `robots.index: false`
+des métadonnées des deux pages pour permettre leur indexation.
+
+Sources utilisées pour préparer les rubriques :
+- [Mentions obligatoires — ministère de l’Économie](https://www.economie.gouv.fr/entreprises/developper-son-entreprise/innover-et-numeriser-son-entreprise/mentions-sur-votre-site-internet-les-obligations-respecter)
+- [Information lors de la collecte — CNIL](https://www.cnil.fr/fr/exemples-de-formulaire-de-collecte-de-donnees-caractere-personnel)
+- [Politique de FormSubmit](https://formsubmit.co/privacy.pdf)
 
 ## Getting Started
 

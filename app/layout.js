@@ -14,7 +14,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fr" className={`${geist.variable} h-full scroll-smooth antialiased`}>
+    <html lang="fr" data-scroll-behavior="smooth" className={`${geist.variable} h-full scroll-smooth antialiased`}>
       <body className="min-h-full bg-background font-sans text-ink">
         {children}
       </body>

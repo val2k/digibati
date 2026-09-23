@@ -5,32 +5,31 @@ const offers = [
   {
     name: "Site essentiel",
     fit: "Pour démarrer",
-    price: "799 €",
+    price: "690 €",
     monthlyPrice: "29 €",
     description:
       "Une page claire pour présenter votre entreprise, rassurer vos visiteurs et être contacté.",
     features: [
-      "Une page adaptée aux mobiles",
-      "Tous vos services sur la même page",
-      "Design adapté à votre identité",
-      "Formulaire de demande de devis",
-      "Fondations du référencement local",
+      "Une page pour présenter votre entreprise et vos services",
+      "Un design adapté aux couleurs de votre entreprise",
+      "Un formulaire de demande de devis",
+      "Les bases du référencement local",
     ],
     details: "Une série de corrections incluse avant la mise en ligne.",
   },
   {
-    name: "Site métier",
+    name: "Site multipage",
     fit: "Recommandé",
-    price: "1 499 €",
+    price: "1 290 €",
     monthlyPrice: "29 €",
     description:
       "Un site complet pour détailler vos prestations et aider vos futurs clients à choisir votre entreprise.",
     features: [
-      "Accueil et page contact",
-      "Jusqu’à 4 pages dédiées à vos services",
-      "Design adapté à votre identité",
-      "Formulaire de demande de devis",
-      "Référencement local par prestation",
+      "Une page d’accueil et une page contact",
+      "Jusqu’à 6 pages dédiées à vos services",
+      "Un design adapté aux couleurs de votre entreprise",
+      "Un formulaire de demande de devis",
+      "Un référencement local travaillé page par page",
     ],
     details: "Deux séries de corrections incluses. Blog, réalisations et pages supplémentaires en option.",
     featured: true,
@@ -38,17 +37,16 @@ const offers = [
   {
     name: "Site sur mesure",
     fit: "Pour aller plus loin",
-    price: "2 990 €",
+    price: "2 490 €",
     startingFrom: true,
     monthlyPrice: "29 €",
     description:
       "Un site pensé autour de votre entreprise, de votre identité et de vos objectifs.",
     features: [
-      "Direction artistique et maquette originales",
-      "Organisation du site sur mesure",
-      "Contenus et parcours personnalisés",
-      "Fonctionnalités spécifiques sur devis",
-      "Accompagnement au lancement",
+      "Un design unique, créé pour votre entreprise",
+      "Un nombre de pages défini selon votre projet",
+      "Une organisation des contenus et une navigation personnalisées",
+      "Des fonctionnalités définies selon vos besoins",
     ],
     details: "Un devis adapté à votre projet, avec les pages, fonctionnalités et étapes de validation définies ensemble.",
   },
@@ -158,7 +156,7 @@ export default function Offers() {
                 size="compact"
                 className="mt-auto"
               >
-                Découvrir l’offre
+                Demander un devis
               </ContactButton>
             </article>
           ))}

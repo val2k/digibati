@@ -1,12 +1,10 @@
-import Link from "next/link";
 import { ConversationIcon } from "@/components/ButtonIcons";
 import { ContactButton } from "@/components/ContactDrawer";
 import FooterCrane from "@/components/FooterCrane";
+import FooterLegal from "@/components/FooterLegal";
+import FooterTitle from "@/components/FooterTitle";
 
-const focusClasses =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-brand-strong";
-
-export default function Footer() {
+export default function Footer({ currentPage }) {
   return (
     <footer
       id="contact"
@@ -18,35 +16,25 @@ export default function Footer() {
       />
 
       <div className="relative z-10 my-16 w-full max-w-[90rem] px-5 sm:my-[clamp(4rem,8vh,7rem)] sm:px-8 lg:px-[clamp(1.5rem,4vw,5.1rem)]">
-        <h2 className="font-display text-heading text-white">
-          Votre savoir-faire mérite
-          <br />
-          un site à sa hauteur.
-        </h2>
+        <FooterTitle />
         <p className="text-body-large mt-8 max-w-[43rem] text-white sm:mt-[clamp(2rem,4vh,3.3rem)]">
           Parlons de votre activité et construisons un site qui inspire
-          confiance dès le premier regard.
+          confiance dès le premier regard, et attire les prospects
         </p>
-        <ol className="text-small mt-6 max-w-[43rem] list-decimal space-y-4 pl-5 marker:font-semibold">
-          <li className="pl-2">
+        <ul className="text-small mt-6 max-w-[43rem] space-y-[6px]">
+          <li className="flex items-start gap-3">
+            <span aria-hidden="true" className="shrink-0 font-bold text-white">✓</span>
             <h3 className="text-body font-semibold leading-snug">Montrez ce que vous savez faire</h3>
-            <p className="text-small text-white/80">
-              Mettez vos réalisations en valeur pour donner confiance à vos futurs clients.
-            </p>
           </li>
-          <li className="pl-2">
+          <li className="flex items-start gap-3">
+            <span aria-hidden="true" className="shrink-0 font-bold text-white">✓</span>
             <h3 className="text-body font-semibold leading-snug">Attirez les bonnes demandes</h3>
-            <p className="text-small text-white/80">
-              Présentez clairement vos prestations et votre secteur pour être contacté pour les bons projets.
-            </p>
           </li>
-          <li className="pl-2">
+          <li className="flex items-start gap-3">
+            <span aria-hidden="true" className="shrink-0 font-bold text-white">✓</span>
             <h3 className="text-body font-semibold leading-snug">Donnez envie de vous contacter</h3>
-            <p className="text-small text-white/80">
-              Un appel, un message, une demande de devis : facilitez le premier pas.
-            </p>
           </li>
-        </ol>
+        </ul>
         <ContactButton
           variant="inverse"
           className="mt-12 sm:mt-[clamp(3rem,5vh,4rem)]"
@@ -57,17 +45,7 @@ export default function Footer() {
         <FooterCrane />
       </div>
 
-      <div className="text-small relative z-10 flex flex-col gap-3 border-t border-white/10 px-5 py-4 text-white/70 sm:px-8 md:flex-row md:items-center md:justify-between md:gap-8 lg:px-[clamp(1.5rem,4vw,5.1rem)]">
-        <p>© 2026 Digibati. Tous droits réservés.</p>
-        <nav aria-label="Informations légales" className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2">
-          <Link href="/mentions-legales" className={`transition-colors hover:text-white ${focusClasses}`}>
-            Mentions légales
-          </Link>
-          <Link href="/politique-de-confidentialite" className={`transition-colors hover:text-white ${focusClasses}`}>
-            Politique de confidentialité
-          </Link>
-        </nav>
-      </div>
+      <FooterLegal currentPage={currentPage} />
     </footer>
   );
 }

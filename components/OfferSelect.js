@@ -5,17 +5,17 @@ import { useEffect, useRef, useState } from "react";
 const offers = [
   {
     name: "Site essentiel",
-    price: "799 € HT",
+    price: "690 € HT",
     description: "Une page pour démarrer",
   },
   {
-    name: "Site métier",
-    price: "1 499 € HT",
-    description: "Jusqu’à 4 pages services, blog et réalisations en option",
+    name: "Site multipage",
+    price: "1 290 € HT",
+    description: "Jusqu’à 6 pages services, blog et réalisations en option",
   },
   {
     name: "Site sur mesure",
-    price: "Dès 2 990 € HT",
+    price: "Dès 2 490 € HT",
     description: "Un site pensé autour de votre entreprise",
   },
   {

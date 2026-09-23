@@ -3,14 +3,11 @@ import { ConversationIcon, EyeIcon } from "@/components/ButtonIcons";
 import CtaButton from "@/components/CtaButton";
 import ContactDrawer, {
   ContactButton,
-  ContactTrigger,
 } from "@/components/ContactDrawer";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import Offers from "@/components/Offers";
 import plumberDemo from "@/public/images/laurent-adam-demo.png";
-
-const focusClasses =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-4";
 
 function Crane() {
   return (
@@ -82,40 +79,7 @@ export default function Home() {
     <ContactDrawer>
       <main>
         <div className="relative isolate min-h-[100svh] overflow-hidden bg-surface">
-          <header className="site-topbar relative z-20 border-b border-line">
-            <div className="mx-5 flex h-full items-center sm:mx-8 lg:mx-[clamp(1.5rem,4vw,5.1rem)]">
-              <a
-                href="#top"
-                aria-label="Digibati, accueil"
-                className={`font-display text-brandmark text-brand ${focusClasses}`}
-              >
-                digibati
-              </a>
-              <nav
-                aria-label="Navigation principale"
-                className="ml-auto flex items-center gap-3 max-[360px]:gap-2 sm:gap-8"
-              >
-                <a
-                  href="#offres"
-                  className={`text-label transition-colors hover:text-brand ${focusClasses}`}
-                >
-                  Nos offres
-                </a>
-                <a
-                  href="#contact"
-                  className={`text-label transition-colors hover:text-brand ${focusClasses}`}
-                >
-                  Contact
-                </a>
-                <ContactTrigger
-                  aria-label="Parlons de votre site"
-                  className={`inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-lg bg-brand text-white transition-colors hover:bg-brand-strong motion-reduce:transition-none ${focusClasses}`}
-                >
-                  <ConversationIcon className="size-6 shrink-0" />
-                </ContactTrigger>
-              </nav>
-            </div>
-          </header>
+          <Navbar isHome />
 
           <section
             id="top"

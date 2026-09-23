@@ -659,6 +659,43 @@
   }
 }
 
+.footer-title-word {
+  display: inline-block;
+  /* Mask the vertical reveal without clipping glyphs with negative tracking. */
+  overflow-x: visible;
+  overflow-y: clip;
+  vertical-align: top;
+  /* Leave room for accents and descenders without changing the line spacing. */
+  padding-block: 0.16em;
+  margin-block: -0.16em;
+}
+
+.footer-title-word-content {
+  display: inline-block;
+}
+
+.footer-title[data-reveal="pending"] .footer-title-word-content {
+  opacity: 0;
+  transform: translateY(120%);
+}
+
+.footer-title[data-reveal="visible"] .footer-title-word-content {
+  animation: footer-title-reveal 850ms cubic-bezier(0.16, 1, 0.3, 1)
+    var(--reveal-delay, 0ms) backwards;
+}
+
+@keyframes footer-title-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(120%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .footer-crane-trolley {
   animation: footer-crane-travel 9s ease-in-out infinite;
 }
@@ -688,6 +725,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .footer-title[data-reveal] .footer-title-word-content {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
   .offer-reveal > [data-reveal] {
     opacity: 1;
     animation: none;

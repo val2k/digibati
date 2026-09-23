@@ -11,7 +11,9 @@ import {
 } from "react";
 import { useSearchParams } from "next/navigation";
 import CtaButton from "@/components/CtaButton";
+import { ConversationIcon } from "@/components/ButtonIcons";
 import OfferSelect from "@/components/OfferSelect";
+import { CONTACT_EMAIL, CONTACT_ENDPOINT, sendContactRequest } from "@/lib/contact.mjs";
 
 const ContactContext = createContext(null);
 
@@ -65,7 +67,8 @@ export default function ContactDrawer({ children }) {
   const closeButtonRef = useRef(null);
   const unlockScrollRef = useRef(null);
   const pointerStartedOutsideRef = useRef(false);
-  const [messagePrepared, setMessagePrepared] = useState(false);
+  const submittingRef = useRef(false);
+  const [status, setStatus] = useState("idle");
   const [selectedOffer, setSelectedOffer] = useState("");
   const [source, setSource] = useState("");
 
@@ -108,7 +111,6 @@ export default function ContactDrawer({ children }) {
       unlockScrollRef.current = null;
     };
 
-    setMessagePrepared(false);
     dialog.showModal();
     dialog.scrollTop = 0;
     closeButtonRef.current?.focus({ preventScroll: true });
@@ -129,8 +131,9 @@ export default function ContactDrawer({ children }) {
     );
   }
 
-  function prepareEmail(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    if (submittingRef.current) return;
     for (const fieldName of ["name", "project"]) {
       const field = event.currentTarget.elements.namedItem(fieldName);
       if (!field.value.trim()) {
@@ -140,30 +143,21 @@ export default function ContactDrawer({ children }) {
       }
     }
 
-    const form = new FormData(event.currentTarget);
-    const name = form.get("name").trim();
-    const company = form.get("company").trim();
-    const email = form.get("email").trim();
-    const phone = form.get("phone").trim();
-    const offer = form.get("offer");
-    const project = form.get("project").trim();
-    const subject = `Parlons de mon projet${company ? ` — ${company}` : ""}`;
-    const body = [
-      "Bonjour Digibati,",
-      "",
-      `Offre : ${offer}`,
-      ...(form.get("source") === "demo" ? ["Provenance : démo"] : []),
-      "",
-      project,
-      "",
-      `Nom : ${name}`,
-      ...(company ? [`Entreprise : ${company}`] : []),
-      `E-mail : ${email}`,
-      ...(phone ? [`Téléphone : ${phone}`] : []),
-    ].join("\n");
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    submittingRef.current = true;
+    setStatus("submitting");
 
-    window.location.href = `mailto:bonjour@digibati.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setMessagePrepared(true);
+    try {
+      await sendContactRequest(formData);
+      form.reset();
+      setSelectedOffer("");
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    } finally {
+      submittingRef.current = false;
+    }
   }
 
   return (
@@ -227,12 +221,22 @@ export default function ContactDrawer({ children }) {
           </div>
 
           <form
+            action={CONTACT_ENDPOINT}
+            method="post"
             className="contact-form"
-            onSubmit={prepareEmail}
-            onInput={(event) => event.target.setCustomValidity("")}
+            aria-busy={status === "submitting"}
+            onSubmit={handleSubmit}
+            onInput={(event) => {
+              event.target.setCustomValidity?.("");
+              if (!submittingRef.current) setStatus("idle");
+            }}
           >
             <input type="hidden" name="source" value={source} />
-            <div className="contact-form-grid">
+            <input type="hidden" name="_subject" value="Digibati — Nouvelle demande de projet" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+            <fieldset className="contact-form-grid min-w-0 border-0 p-0" disabled={status === "submitting"}>
               <label className="contact-field" htmlFor="contact-name">
                 <span>Votre nom</span>
                 <input
@@ -298,30 +302,44 @@ export default function ContactDrawer({ children }) {
                   required
                 />
               </label>
-            </div>
+            </fieldset>
             <CtaButton
               as="button"
               type="submit"
-              className="contact-form-submit mt-6 sm:w-full"
+              disabled={status === "submitting"}
+              className="contact-form-submit mt-6 disabled:cursor-wait disabled:opacity-70 sm:w-full"
             >
-              Continuer par e-mail
-              <span aria-hidden="true">↗</span>
+              {status === "success" ? <span aria-hidden="true">✓</span> : <ConversationIcon />}
+              {status === "submitting" ? "Envoi en cours…" : status === "error" ? "Réessayer l’envoi" : "Envoyer ma demande"}
             </CtaButton>
-            <p className="contact-form-note" role="status">
-              {messagePrepared ? (
+            <p className="contact-form-note" role="status" aria-atomic="true">
+              {status === "success" ? (
+                "Merci, votre demande a bien été envoyée. Nous vous répondrons par e-mail."
+              ) : status === "error" ? (
                 <>
-                  Finalisez l’envoi dans votre messagerie. Si elle ne s’ouvre pas,
-                  écrivez à{" "}
-                  <a className="underline" href="mailto:bonjour@digibati.fr">
-                    bonjour@digibati.fr
+                  L’envoi n’a pas pu être confirmé. Vos informations sont conservées.
+                  Réessayez ou écrivez à{" "}
+                  <a className="underline" href={`mailto:${CONTACT_EMAIL}`}>
+                    {CONTACT_EMAIL}
                   </a>.
                 </>
+              ) : status === "submitting" ? (
+                "Votre demande est en cours d’envoi."
               ) : (
-                <>
-                  Votre messagerie s’ouvrira avec votre message prérempli, à relire
-                  avant envoi.
-                </>
+                "Vos coordonnées nous permettent de vous recontacter au sujet de votre projet."
               )}
+            </p>
+            <p className="contact-form-note">
+              Digibati utilise ces informations pour répondre à votre demande.
+              Consultez notre{" "}
+              <a
+                href="/politique-de-confidentialite"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+              >
+                politique de confidentialité (nouvel onglet)
+              </a>.
             </p>
           </form>
         </div>
